@@ -1,8 +1,17 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 import httpx
 
 app = FastAPI()
-GROK_API_KEY = "your-api-key"  # Replace with your xAI API key
+GROK_API_KEY = "your-api-key"  # Ensure this is your xAI API key
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["https://shop-program.vercel.app"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 async def root():
